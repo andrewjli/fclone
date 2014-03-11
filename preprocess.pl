@@ -6,7 +6,7 @@ $text = <FILE>;
 close FILE;
 #replace all comments with nothing
 $text =~ s{(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/)|(//.*)}{}g;
-#write back to the file
+# write back to the file
 open(FILE, '>TOH.java');
 print FILE $text;
 close FILE;
