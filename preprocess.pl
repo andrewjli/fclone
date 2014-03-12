@@ -6,8 +6,11 @@ $text = <FILE>;
 close FILE;
 #replace all comments with nothing
 $text =~ s{(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/)|(//.*)}{}g;
+#remove all semicolons
+$text =~ s/;//g;
 # write back to the file
-open(FILE, '>TOH.java');
+print $text;
+open(FILE, '>TOHprocessed.java');
 print FILE $text;
 close FILE;
 
