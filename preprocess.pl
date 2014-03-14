@@ -6,11 +6,17 @@ $text = <FILE>;
 close FILE;
 #replace all comments with nothing
 $text =~ s{(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/)|(//.*)}{}g;
+$text =~ s/import(.*)\n//g;
+
 #remove all semicolons
 $text =~ s/;//g;
 # write back to the file
-print $text;
 open(FILE, '>TOHprocessed.java');
 print FILE $text;
 close FILE;
+deQualify($text);
 
+sub deQualify{
+
+
+}
