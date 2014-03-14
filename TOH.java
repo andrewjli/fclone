@@ -131,5 +131,6 @@ class TOH {
         } catch ( Exception e ) {
             e.printStackTrace();
         }
+	java.Lang.Integer;
     }
 }
