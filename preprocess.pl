@@ -17,11 +17,13 @@ print FILE $text;
 close FILE;
 $text = deQualify($text);
 print $text;
+
 sub deQualify{
 	my $text = $_[0];
 	print $text;
-	my @matches = $text =~ m/([a-zA-Z]\w*\.[a-zA-Z]\w*)(\.[a-zA-Z]\w*)*/g;
+	my @matches = $text =~ m/(\w+\.\w+[\.\w+]+)/g;
 	foreach (@matches){
+		print("match: $_\n");
 		@haystack = split('\.', $_);
 		$deQualified = pop (@haystack);
 		$text =~ s/$_/$deQualified/g;
