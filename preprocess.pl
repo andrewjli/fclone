@@ -11,13 +11,20 @@ $text =~ s/import(.*)\n//g;
 
 #remove all semicolons
 $text =~ s/;//g;
+
+
+$text = deQualify($text);
 # write back to the file
 open(FILE, '>TOHprocessed.java');
 print FILE $text;
 close FILE;
-$text = deQualify($text);
 print $text;
 
+
+
+#dequalifies any functions/variabe declearations,
+# java.lang.Integer becomes Integer
+# system.out.println becomes println
 sub deQualify{
 	my $text = $_[0];
 	print $text;
