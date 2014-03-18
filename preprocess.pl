@@ -9,12 +9,12 @@ $text =~ s{(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/)|(//.*)}{}g;
 #remove import statements
 $text =~ s/import(.*)\n//g;
 
+$text = breakVariables($text);
 #remove all semicolons
 $text =~ s/;//g;
 
 
 $text = deQualify($text);
-$text = breakVariables($text);
 # write back to the file
 open(FILE, '>TOHprocessed.java');
 print FILE $text;
@@ -43,10 +43,12 @@ sub deQualify{
 sub breakVariables{
 	my $text = $_[0];
 	#the whole thing
-	my @matches = $text =~ m/(([a-zA-Z0-9].*\s*(\s*\,[a-zA-Z0-9].*)+)\s*=\s*'*"*\w.*"*'*)/g;
+	my @matches = $text =~ m/((\w* \s*\w*\s*(\s*,\s*\w*)+;))/g;
 	foreach (@matches){	
-		my $thing = $_ =~ m/(([a-zA-Z0-9].*(\,[a-zA-Z0-9].*)+)\s*)/g;
-		print $thing;
+		#need to get the first word, which is the type
+		$a =~ /^(.*?)\s/;
+		print $1;
+		
 		
 
 	}	
