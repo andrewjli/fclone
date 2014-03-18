@@ -103,6 +103,7 @@ class TOH {
     static int countA = 0;
     static int countB = 0;
     static int countC = 0;
+    Integer one, two, three;
     static public void PrintStack ( Stack s ) {
         System.out.print ( s.toString() );
     }
