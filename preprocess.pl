@@ -14,6 +14,7 @@ $text =~ s/;//g;
 
 
 $text = deQualify($text);
+$text = breakVariables($text);
 # write back to the file
 open(FILE, '>TOHprocessed.java');
 print FILE $text;
@@ -37,6 +38,18 @@ sub deQualify{
 		
 	}
 	return $text;
+}
 
+sub breakVariables{
+	my $text = $_[0];
+	#the whole thing
+	my @matches = $text =~ m/(([a-zA-Z0-9].*\s*(\s*\,[a-zA-Z0-9].*)+)\s*=\s*'*"*\w.*"*'*)/g;
+	foreach (@matches){	
+		my $thing = $_ =~ m/(([a-zA-Z0-9].*(\,[a-zA-Z0-9].*)+)\s*)/g;
+		print $thing;
+		
+
+	}	
+	return $text;
 
 }
