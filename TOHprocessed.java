@@ -5,13 +5,13 @@
 class TOH {
     static int movecount = 0
     static public void Solve2DiscsTOH ( Stack source, Stack temp, Stack dest ) {
-        push ( pop() )
+        temp.push ( source.pop() )
         movecount++
         PrintStacks()
-        push ( pop() )
+        dest.push ( source.pop() )
         movecount++
         PrintStacks()
-        push ( pop() )
+        dest.push ( temp.pop() )
         movecount++
         PrintStacks()
     }
@@ -23,11 +23,11 @@ class TOH {
                 if ( nDiscs == 1 ) {
                     return 1
                 }
-                push ( pop() )
+                temp.push ( source.pop() )
                 movecount++
                 PrintStacks()
                 Solve2DiscsTOH ( dest, source, temp )
-                push ( pop() )
+                dest.push ( source.pop() )
                 movecount++
                 PrintStacks()
                 SolveTOH ( nDiscs, temp, source, dest )
@@ -37,7 +37,7 @@ class TOH {
                 }
                 Solve2DiscsTOH ( source, dest, temp )
                 nDiscs = nDiscs - 1
-                push ( pop() )
+                dest.push ( source.pop() )
                 movecount++
                 PrintStacks()
                 Solve2DiscsTOH ( temp, source, dest )
@@ -45,11 +45,11 @@ class TOH {
             return 1
         } else if ( nDiscs >= 5 ) {
             SolveTOH ( nDiscs - 2, source, temp, dest )
-            push ( pop() )
+            temp.push ( source.pop() )
             movecount++
             PrintStacks()
             SolveTOH ( nDiscs - 2, dest, source, temp )
-            push ( pop() )
+            dest.push ( source.pop() )
             movecount++
             PrintStacks()
             SolveTOH ( nDiscs - 1, temp, source, dest )
@@ -60,74 +60,75 @@ class TOH {
     static public Stack B = new Stack()
     static public Stack C = new Stack()
     static public void PrintStacks() {
-        if ( countA != size() ||
-                countB != size() ||
-                countC != size() ) {
-            int diffA = size() - countA
-            int diffB = size() - countB
-            int diffC = size() - countC
+        if ( countA != A.size() ||
+                countB != B.size() ||
+                countC != C.size() ) {
+            int diffA = A.size() - countA
+            int diffB = B.size() - countB
+            int diffC = C.size() - countC
             if ( diffA == 1 ) {
                 if ( diffB == -1 ) {
-                    print ( "Move Disc " + peek() + " From B To A" )
+                    System.out.print ( "Move Disc " + A.peek() + " From B To A" )
                 } else {
-                    print ( "Move Disc " + peek() + " From C To A" )
+                    System.out.print ( "Move Disc " + A.peek() + " From C To A" )
                 }
             } else if ( diffB == 1 ) {
                 if ( diffA == -1 ) {
-                    print ( "Move Disc " + peek() + " From A To B" )
+                    System.out.print ( "Move Disc " + B.peek() + " From A To B" )
                 } else {
-                    print ( "Move Disc " + peek() + " From C To B" )
+                    System.out.print ( "Move Disc " + B.peek() + " From C To B" )
                 }
             } else {
                 if ( diffA == -1 ) {
-                    print ( "Move Disc " + peek() + " From A To C" )
+                    System.out.print ( "Move Disc " + C.peek() + " From A To C" )
                 } else {
-                    print ( "Move Disc " + peek() + " From B To C" )
+                    System.out.print ( "Move Disc " + C.peek() + " From B To C" )
                 }
             }
-            countA = size()
-            countB = size()
-            countC = size()
-            println()
+            countA = A.size()
+            countB = B.size()
+            countC = C.size()
+            System.out.println()
         }
         PrintStack ( A )
-        print ( " , " )
+        System.out.print ( " , " )
         PrintStack ( B )
-        print ( " , " )
+        System.out.print ( " , " )
         PrintStack ( C )
-        print ( " , " )
+        System.out.print ( " , " )
     }
     static int countA = 0
     static int countB = 0
     static int countC = 0
+    Integer one, two, three
     static public void PrintStack ( Stack s ) {
-        print ( toString() )
+        System.out.print ( s.toString() )
     }
     public static void main ( String[] args ) {
         try {
             int maxdisc = 0
             String inpstring = args[0]
             movecount = 0
-            maxdisc = parseInt ( inpstring )
+            maxdisc = Integer.parseInt ( inpstring )
             if ( maxdisc <= 1 || maxdisc >= 10 ) {
-                println ( "Enter between 2 - 9" )
+                System.out.println ( "Enter between 2 - 9" )
                 return
             }
             for ( int i = maxdisc i >= 1 i-- ) {
-                push ( i )
+                A.push ( i )
             }
-            countA = size()
-            countB = size()
-            countC = size()
+            countA = A.size()
+            countB = B.size()
+            countC = C.size()
             PrintStacks()
             SolveTOH ( maxdisc, A, B, C )
-            println ( "Total Moves = " + movecount )
-            while ( size() > 0 ) {
-                pop()
+            System.out.println ( "Total Moves = " + movecount )
+            while ( C.size() > 0 ) {
+                C.pop()
             }
         } catch ( Exception e ) {
-            printStackTrace()
+            e.printStackTrace()
         }
-	Integer
+	java.Lang.Integer
     }
 }
