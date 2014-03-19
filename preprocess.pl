@@ -43,20 +43,21 @@ sub deQualify{
 sub breakVariables{
 	my $text = $_[0];
 	#the whole thing
-	my @matches = $text =~ m/((\w* \s*\w*\s*(\s*,\s*\w*)+;))/g;
+	my @matches = $text =~ m/(\w* \s*\w*\s*(\s*,\s*\w*)+;)/g;
 	foreach (@matches){	
 		#need to get the first word, which is the type
+		print("match: $_ \n");
 		$a =$_ =~ /^(.*?)\s/;
 		$type = $1;
 	#	print("type: $type \n");
 		$variableStr = $_;
 		$variableStr =~  s/$type//g;
-		print("variables: $variableStr\n");
+		#print("variables: $variableStr\n");
 		chop($variableStr);
 		@variables = split(',', $variableStr);
 		foreach(@variables){
 		#	$variable = pop(@variables);
-			print("$type $_ = 9 \n");
+#			print("$type $_ = 9 \n");
 
 		}	
 
