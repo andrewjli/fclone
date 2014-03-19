@@ -14,12 +14,12 @@ $text = breakVariables($text);
 $text =~ s/;//g;
 
 
-$text = deQualify($text);
+#$text = deQualify($text);
 # write back to the file
 open(FILE, '>TOHprocessed.java');
 print FILE $text;
 close FILE;
-print $text;
+#print $text;
 
 
 
@@ -46,10 +46,19 @@ sub breakVariables{
 	my @matches = $text =~ m/((\w* \s*\w*\s*(\s*,\s*\w*)+;))/g;
 	foreach (@matches){	
 		#need to get the first word, which is the type
-		$a =~ /^(.*?)\s/;
-		print $1;
-		
-		
+		$a =$_ =~ /^(.*?)\s/;
+		$type = $1;
+	#	print("type: $type \n");
+		$variableStr = $_;
+		$variableStr =~  s/$type//g;
+		print("variables: $variableStr\n");
+		chop($variableStr);
+		@variables = split(',', $variableStr);
+		foreach(@variables){
+		#	$variable = pop(@variables);
+			print("$type $_ = 9 \n");
+
+		}	
 
 	}	
 	return $text;
