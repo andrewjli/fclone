@@ -14,6 +14,7 @@ char = letter | digit | whitespace
 character = Str("\'") + char + Str("\'")
 string = Str("\"") + Rep(char) + Str("\"")
 identifier = javaletter + Rep(javaletter|digit)
+annotation = Str("@") + identifier
 
 lexicon = Lexicon([
     # Java keywords
@@ -134,14 +135,15 @@ lexicon = Lexicon([
     (identifier, "IDENTIFIER"),
     (decimal, "DECIMAL"),
     (integer, "INTEGER"),
+    (annotation, "ANNOTATION"),
     (whitespace, IGNORE)
 ])
 
-filename = "my_file.txt"
+filename = "TOHprocessed.java"
 f = open(filename, "r")
 scanner = Scanner(lexicon, f, filename)
 while 1:
     token = scanner.read()
-    print token
+    print token[0]
     if token[0] is None:
         break
