@@ -9,7 +9,7 @@ $text =~ s{(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/)|(//.*)}{}g;
 #remove import statements
 $text =~ s/import(.*)\n//g;
 
-breakAssigments($text);
+$text =breakAssigments($text);
 $text = breakVariables($text);
 #remove all semicolons
 $text =~ s/;//g;
@@ -74,15 +74,17 @@ sub breakVariables{
 }
 
 sub breakAssigments(){
-	my $text = $_[0];	
-	my @matches = $text =~  m/(\w+\s*=\s*\w+(\s*=\s*\w+)+;)/g;
+	 $text = $_[0];	
+	my @matches = $text =~  m/(\w+\s*=\s*\w+[\s*=\s*\w+]+;)/g;
 	foreach( @matches){
-	print("match (assignment): $_\n");
-	@haystack = split('=', $_);
-	foreach(@haystack){
-	#print("variable(assigment)"."$_\n");
+		@haystack = split('=', $_);	
+		$literal = pop(@haystack);
+		my $replacement = '';
+		foreach(@haystack){
+			$replacement .= "$_ = $literal\n";
+		}
+		$text =~ s/$_/$replacement/g;	
 	}
-	$literal = pop(@haystack);
-	}
+	return $text;
 
 }
