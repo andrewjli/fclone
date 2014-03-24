@@ -14,7 +14,10 @@ class TOH {
         dest.push ( temp.pop() )
         movecount++
         PrintStacks()
-	face = hello = misterface = 5
+	face  =  5
+ hello  =  5
+ misterface  =  5
+
     }
     static public int SolveTOH ( int nDiscs, Stack source, Stack temp, Stack dest ) {
         if ( nDiscs <= 4 ) {
@@ -118,7 +121,8 @@ Integer  three
                 System.out.println ( "Enter between 2 - 9" )
                 return
             }
-            for ( int i = maxdisc i >= 1 i-- ) {
+            for ( int i  =  maxdisc
+ i >= 1 i-- ) {
                 A.push ( i )
             }
             countA = A.size()
