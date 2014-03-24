@@ -9,9 +9,11 @@ $text =~ s{(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/)|(//.*)}{}g;
 #remove import statements
 $text =~ s/import(.*)\n//g;
 
+breakAssigments($text);
 $text = breakVariables($text);
 #remove all semicolons
 $text =~ s/;//g;
+
 
 
 #$text = deQualify($text);
@@ -43,7 +45,7 @@ sub deQualify{
 sub breakVariables{
 	my $text = $_[0];
 	#the whole thing
-	my @matches = $text =~ m/(\w* \s*\w*\s*(\s*,\s*\w*)+;)/g;
+	my @matches = $text =~ m/(\w+ \s*\w+\s*[\s*,\s*\w+]+;)/g;
 	foreach (@matches){	
 		#need to get the first word, which is the type
 		print("match: $_ \n");
@@ -64,7 +66,7 @@ sub breakVariables{
 
 		}
 		#replace line with multi-line declarations
-		$text ~= s/$match/$replacement/g;	
+		$text =~ s/$match/$replacement/g;	
 
 	}	
 	return $text;
@@ -73,9 +75,13 @@ sub breakVariables{
 
 sub breakAssigments(){
 	my $text = $_[0];	
-	my @matches = $text =~ m/(\w*\s*=\s*\w*(\s*=\s*\w*)*)/g;
-	foreach @matches{
+	my @matches = $text =~  m/(\w+\s*=\s*\w+(\s*=\s*\w+)+;)/g;
+	foreach( @matches){
+	print("match (assignment): $_\n");
 	@haystack = split('=', $_);
+	foreach(@haystack){
+	#print("variable(assigment)"."$_\n");
+	}
 	$literal = pop(@haystack);
 	}
 
