@@ -70,3 +70,13 @@ sub breakVariables{
 	return $text;
 
 }
+
+sub breakAssigments(){
+	my $text = $_[0];	
+	my @matches = $text =~ m/(\w*\s*=\s*\w*(\s*=\s*\w*)*)/g;
+	foreach @matches{
+	@haystack = split('=', $_);
+	$literal = pop(@haystack);
+	}
+
+}
