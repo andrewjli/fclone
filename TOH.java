@@ -17,6 +17,7 @@ class TOH {
         dest.push ( temp.pop() );
         movecount++;
         PrintStacks();
+	face = hello = misterface = 5;
     }
     static public int SolveTOH ( int nDiscs, Stack source, Stack temp, Stack dest ) {
         if ( nDiscs <= 4 ) {
