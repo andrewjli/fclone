@@ -2,7 +2,7 @@ FClone
 ====
 
 ### Requirements
-* Python 2.7
+* Python 2.7 (source version)
 * Perl
 
 ### Build Instructions
@@ -12,15 +12,18 @@ FClone
 4. Copy `preprocess.pl` into `dist`
 
 ### Usage Instructions
-**Using a compiled version:**
 
-`fclone file1 file2 threshold`
+FClone is available in two versions: source and compiled. The source version is the raw source code, and can be run like any regular Python script.
+
+`python fclone.py file1 file2 threshold`
 
 * `file1` and `file2` are names of Java files **without the `.java` extension**
 * `threshold` is an integer
 
-**Using source version:**
+The compiled version of FClone is compiled using py2exe and can be found [here](https://github.com/andrewjli/fclone/releases). These versions are able to run on computers that do not have Python installed, but *Perl is still required for FClone to work!*
 
-`python fclone.py file1 file2 threshold`
+`fclone file1 file2 threshold`
 
 * Arguments are the same as above
+
+**NOTE: Compiled versions of FClone have only been tested on Windows.**
