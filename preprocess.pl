@@ -1,7 +1,11 @@
 #!/usr/bin/perl
 #read in the whole file as a string
+#get the file argument
+foreach my $file (@ARGV){
+	$fileName = $file;
+}
 local $/=undef;
-open(FILE, 'TOH.java');
+open(FILE, "$fileName.java");
 $text = <FILE>;
 close FILE;
 #replace all comments with nothing
@@ -18,7 +22,8 @@ $text =~ s/;//g;
 
 #$text = deQualify($text);
 # write back to the file
-open(FILE, '>TOHprocessed.java');
+print "filename: $fileName \n";
+open(FILE, ">$fileName"."processed.java");
 print FILE $text;
 close FILE;
 #print $text;
