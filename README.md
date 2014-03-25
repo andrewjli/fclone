@@ -1,6 +1,8 @@
 FClone
 ====
 
+FClone is a simple code similarity detector for Java source code.
+
 ### Requirements
 * Python 2.7 (source version)
 * Perl
