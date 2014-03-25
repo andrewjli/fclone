@@ -21,7 +21,7 @@ $text = deQualify($text);
 
 
 # write back to the file
-open(FILE, ">$fileName"."processed.java");
+open(FILE, ">$fileName"."p");
 print FILE $text;
 close FILE;
 #print $text;
