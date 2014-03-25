@@ -1,3 +1,4 @@
+import sys
 from plex import *
 
 whitespace = Any(" \t\r\n\f")
@@ -14,7 +15,9 @@ char = letter | digit | whitespace
 character = Str("\'") + char + Str("\'")
 string = Str("\"") + Rep(char) + Str("\"")
 identifier = javaletter + Rep(javaletter|digit)
-annotation = Str("@") + identifier
+
+emptyfunction = identifier + Str("()")
+annotation = Str("@") + identifier + Opt(Str("(\"") + identifier + Str("\")"))
 
 lexicon = Lexicon([
     # Java keywords
@@ -143,14 +146,20 @@ lexicon = Lexicon([
     (decimal, "NUMERIC"),
     (integer, "NUMERIC"),
     (annotation, "ANNOTATION"),
+    (emptyfunction, "FUNCTION"),
     (whitespace, IGNORE)
 ])
 
-filename = "TOHprocessed.java"
-f = open(filename, "r")
-scanner = Scanner(lexicon, f, filename)
-while 1:
-    token = scanner.read()
-    print token[0]
-    if token[0] is None:
-        break
+
+def tokenise(name):
+    f = open(name, "r")
+    scanner = Scanner(lexicon, f, name)
+
+    #print name[:-1]
+    g = open(name[:-1] + "t", "w")
+    while 1:
+        token = scanner.read()
+        g.write(str(token[0]))
+        g.write("\n")
+        if token[0] is None:
+            break
