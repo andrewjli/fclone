@@ -1,3 +1,5 @@
+import sys
+
 def generate_substrings(l, r):
     l_ret = []
     for i in range(0, len(l)-r+1):
@@ -13,18 +15,18 @@ def generate_substrings(l, r):
 def compare(file1, file2, substring):
     min_size_substring = substring
 
-    print "Reading File 1..."
+    print "Reading file 1..."
     with open(file1, 'r') as f1:
         list1 = f1.read().splitlines()
-    print "Reading File 2..."
+    print "Reading file 2..."
     with open(file2, 'r') as f2:
         list2 = f2.read().splitlines()
 
     if len(list1) > len(list2):
         list1, list2 = list2, list1
 
-    print "Comparing.. Please wait..."
-    print "Percent Complete:"
+    print "Comparing files..."
+    #print "Percent Complete:"
     common = 0
     count_list1_ss = 0
     count_list2_ss = 0
@@ -33,8 +35,10 @@ def compare(file1, file2, substring):
         per2 = (i * 100 / (len(list1)+1))
         if per2 != per1:
             per1 = per2
-            print per1,
-            
+            #print per1,
+            sys.stdout.write("Current progress: %d%%   \r" % (per1) )
+            sys.stdout.flush()
+
         list1_ss = generate_substrings(list1, i)
         count_list1_ss += len(list1_ss)
         list2_ss = generate_substrings(list2, i)
@@ -43,8 +47,9 @@ def compare(file1, file2, substring):
             if item in list2_ss:
                 #print item
                 common += 1
-    print "100"
-    
+    sys.stdout.write("Current progress: %d%%   \r" % (100) )
+    sys.stdout.flush()
+
     #print "Common Substrings: ", common
     result = float(common) * 200.0 / (float(count_list1_ss) + float(count_list2_ss))
-    print "\nResult: ", int(result), "%"
+    print "\n\nResult: " + str(int(result)) + "%"
