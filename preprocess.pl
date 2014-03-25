@@ -17,12 +17,10 @@ $text =breakAssigments($text);
 $text = breakVariables($text);
 #remove all semicolons
 $text =~ s/;//g;
+$text = deQualify($text);
 
 
-
-#$text = deQualify($text);
 # write back to the file
-print "filename: $fileName \n";
 open(FILE, ">$fileName"."processed.java");
 print FILE $text;
 close FILE;
@@ -35,10 +33,8 @@ close FILE;
 # system.out.println becomes println
 sub deQualify{
 	my $text = $_[0];
-	print $text;
 	my @matches = $text =~ m/(\w+\.\w+[\.\w+]+)/g;
 	foreach (@matches){
-		print("match: $_\n");
 		@haystack = split('\.', $_);
 		$deQualified = pop (@haystack);
 		$text =~ s/$_/$deQualified/g;
@@ -53,7 +49,6 @@ sub breakVariables{
 	my @matches = $text =~ m/(\w+ \s*\w+\s*[\s*,\s*\w+]+;)/g;
 	foreach (@matches){	
 		#need to get the first word, which is the type
-		print("match: $_ \n");
 		$match = $_;
 		$a =$_ =~ /^(.*?)\s/;
 		$type = $1;
