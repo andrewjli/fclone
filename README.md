@@ -13,12 +13,14 @@ FClone
 
 ### Usage Instructions
 **Using a compiled version:**
+
 `fclone file1 file2 threshold`
 
 * `file1` and `file2` are names of Java files **without the `.java` extension**
 * `threshold` is an integer
 
 **Using source version:**
+
 `python fclone.py file1 file2 threshold`
 
 * Arguments are the same as above
