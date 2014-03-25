@@ -16,6 +16,12 @@ def start():
 
 	compare(file1+"t", file2+"t", int(substring))
 
+	# clean intermediate files
+	os.remove(file1+"p")
+	os.remove(file1+"t")
+	os.remove(file2+"p")
+	os.remove(file2+"t")
+
 	#print "done"
 
 start()

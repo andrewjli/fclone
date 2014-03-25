@@ -162,4 +162,6 @@ def tokenise(name):
         g.write(str(token[0]))
         g.write("\n")
         if token[0] is None:
+            f.close()
+            g.close()
             break
