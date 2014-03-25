@@ -9,7 +9,7 @@ FClone
 1. Download the source code
 2. Install [py2exe](http://www.py2exe.org/)
 3. Run `python setup.py py2exe` in the source directory
-4. Copy `preprocess.pl` into `dist`
+4. Copy `preprocess.pl` and `README.md` into `dist`
 
 ### Usage Instructions
 
