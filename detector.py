@@ -9,40 +9,42 @@ def generate_substrings(l, r):
         l_ret.append(str)
     return l_ret
 
-min_size_substring = 6
-
 ### READ TOKENS
-print ("Reading File 1...")
-with open('tk1.txt', 'r') as f1:
-    list1 = f1.read().splitlines()
-print ("Reading File 2...")
-with open('tk2.txt', 'r') as f2:
-    list2 = f2.read().splitlines()
+def compare(file1, file2, substring):
+    min_size_substring = substring
 
-if len(list1) > len(list2):
-    list1, list2 = list2, list1
+    print "Reading File 1..."
+    with open(file1, 'r') as f1:
+        list1 = f1.read().splitlines()
+    print "Reading File 2..."
+    with open(file2, 'r') as f2:
+        list2 = f2.read().splitlines()
 
-print ("Comparing.. Please wait...")
-print ("Percent Complete:")
-common = 0
-count_list1_ss = 0
-count_list2_ss = 0
-per1 = 0
-for i in range(min_size_substring, len(list1)+1):
-    per2 = (i * 100 / (len(list1)+1-min_size_substring))
-    if round(per2) > round(per1):
-        per1 = per2
-        print (round(per1))
-        
-    list1_ss = generate_substrings(list1, i)
-    count_list1_ss += len(list1_ss)
-    list2_ss = generate_substrings(list2, i)
-    count_list2_ss += len(list2_ss)
-    for item in list1_ss:
-        if item in list2_ss:
-            #print item
-            common += 1
-print (" ")
-print ("Common Substrings: ", common)
-result = float(common) * 2.0 / (float(count_list1_ss) + float(count_list2_ss))
-print ("Result: ", round(result, 2))
+    if len(list1) > len(list2):
+        list1, list2 = list2, list1
+
+    print "Comparing.. Please wait..."
+    print "Percent Complete:"
+    common = 0
+    count_list1_ss = 0
+    count_list2_ss = 0
+    per1 = 0
+    for i in range(0, len(list1)+1):
+        per2 = (i * 100 / (len(list1)+1))
+        if per2 != per1:
+            per1 = per2
+            print per1,
+            
+        list1_ss = generate_substrings(list1, i)
+        count_list1_ss += len(list1_ss)
+        list2_ss = generate_substrings(list2, i)
+        count_list2_ss += len(list2_ss)
+        for item in list1_ss:
+            if item in list2_ss:
+                #print item
+                common += 1
+    print "100"
+    
+    #print "Common Substrings: ", common
+    result = float(common) * 200.0 / (float(count_list1_ss) + float(count_list2_ss))
+    print "\nResult: ", int(result), "%"
